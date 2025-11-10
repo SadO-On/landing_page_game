@@ -3,6 +3,8 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
+        maven("https://jogamp.org/deployment/maven")
+
         google {
             mavenContent {
                 includeGroupAndSubgroups("androidx")
@@ -17,6 +19,8 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
+        maven("https://jogamp.org/deployment/maven")
+
         google {
             mavenContent {
                 includeGroupAndSubgroups("androidx")
@@ -25,6 +29,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+
     }
 }
 

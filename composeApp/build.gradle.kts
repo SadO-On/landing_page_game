@@ -8,10 +8,10 @@ plugins {
 }
 
 kotlin {
-    js {
-        browser()
-        binaries.executable()
-    }
+//    js {
+//        browser()
+//        binaries.executable()
+//    }
     
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
@@ -31,6 +31,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.kstore)
             implementation(libs.kstore.storage)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
