@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import landingpagegame.composeapp.generated.resources.Res
 import landingpagegame.composeapp.generated.resources.powered_by
@@ -37,7 +38,8 @@ fun HomeScreen(){
                 contentDescription = "Title"
             )
         }
-//        StarterVideoPlayer()
+        ImageStarterPlayer(modifier = Modifier.scale(1.5f))
+
         Spacer(modifier = Modifier.weight(1f))
         ScaleAnimation(delayTime = 100) {
 
