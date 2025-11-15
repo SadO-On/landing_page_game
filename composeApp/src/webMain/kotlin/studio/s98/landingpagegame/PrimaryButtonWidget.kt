@@ -1,6 +1,7 @@
 package studio.s98.landingpagegame
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -12,31 +13,41 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import landingpagegame.composeapp.generated.resources.Res
+import landingpagegame.composeapp.generated.resources.play_button
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import landingpagegame.composeapp.generated.resources.level_holder
+
 
 @Composable
-fun LevelHolderWidget(level: String) {
+fun PrimaryButtonWidget(text: String, onClick: () -> Unit) {
+//    val context = LocalContext.current
+//    val player = MediaPlayer.create(context, R.raw.click)
 
-    Box(contentAlignment = Alignment.Center) {
+
+    Box(contentAlignment = Alignment.Center, modifier = Modifier.clickable {
+        onClick()
+//        player.start()
+    }) {
         Image(
-            painter = painterResource(resource = Res.drawable.level_holder),
-            contentDescription = "Level holder"
+            painter = painterResource(resource =  Res.drawable.play_button),
+            contentDescription = "play button"
         )
         Text(
-            text = level,
-            modifier = Modifier.padding(top = 12.dp),
+            text = text,
+            modifier = Modifier.padding(bottom = 12.dp),
             fontWeight = FontWeight.Bold,
             color = Color.White,
             fontSize = 40.sp
         )
     }
+
 }
 
 
 @Preview
 @Composable
-fun LevelHolderWidgetPreview() {
-    LevelHolderWidget("12")
+private fun PrimaryButtonWidgetPreview() {
+    PrimaryButtonWidget(text = "إلعب") {
+
+    }
 }

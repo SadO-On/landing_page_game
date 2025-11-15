@@ -1,4 +1,4 @@
-package studio.s98.landingpagegame
+package studio.s98.landingpagegame.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
