@@ -21,7 +21,9 @@ import studio.s98.landingpagegame.util.mainBackground
 import studio.s98.landingpagegame.viewmodel.UserLevel
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(
+    onPlayClick: ()-> Unit
+){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -44,7 +46,7 @@ fun HomeScreen(){
         ScaleAnimation(delayTime = 100) {
 
             PrimaryButtonWidget(text = "Play") {
-//                navController.navigate(Screen.Board.withArgs(Gson().toJson(uiState.userLevel)))
+                onPlayClick()
             }
         }
         ScaleAnimation(delayTime = 600) {
