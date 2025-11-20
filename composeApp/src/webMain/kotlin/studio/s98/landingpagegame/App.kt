@@ -8,11 +8,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import studio.s98.landingpagegame.board.BoardScreen
 import studio.s98.landingpagegame.home.HomeScreen
 
 @Composable
 fun App() {
-    MaterialTheme {
+    MaterialTheme (
+        typography = TajwalTypography()
+    ){
         MainNavGraph()
     }
 }
@@ -33,7 +36,7 @@ fun MainNavGraph(
             }
         }
         composable(route = Routes.Board.name) {
-            BoardScreen()
+            BoardScreen(isFirst = false, toResult = {_,_ ->})
         }
     }
 }

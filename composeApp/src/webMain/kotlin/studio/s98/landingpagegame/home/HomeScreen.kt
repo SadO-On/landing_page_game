@@ -45,7 +45,7 @@ fun HomeScreen(
         Spacer(modifier = Modifier.weight(1f))
         ScaleAnimation(delayTime = 100) {
 
-            PrimaryButtonWidget(text = "Play") {
+            PrimaryButtonWidget(text = "العب") {
                 onPlayClick()
             }
         }
