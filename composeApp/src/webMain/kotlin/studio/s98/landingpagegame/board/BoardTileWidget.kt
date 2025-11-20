@@ -59,6 +59,7 @@ fun BoardTileWidget(
 
 @Composable
 private fun getColor(isOdd: Boolean, letter: Letter): Color {
+    println(letter.toString())
     val colorHex = if (letter.isWrong) {
         0xffDF2EAD
     } else if (letter.isSelected) {

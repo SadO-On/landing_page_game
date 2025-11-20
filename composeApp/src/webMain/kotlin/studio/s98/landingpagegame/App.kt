@@ -13,9 +13,9 @@ import studio.s98.landingpagegame.home.HomeScreen
 
 @Composable
 fun App() {
-    MaterialTheme (
+    MaterialTheme(
         typography = TajwalTypography()
-    ){
+    ) {
         MainNavGraph()
     }
 }
@@ -36,7 +36,9 @@ fun MainNavGraph(
             }
         }
         composable(route = Routes.Board.name) {
-            BoardScreen(isFirst = false, toResult = {_,_ ->})
+            BoardScreen(isFirst = false, toResult = { _, _ -> }, onBackToHome = {
+                navController.navigateUp()
+            })
         }
     }
 }

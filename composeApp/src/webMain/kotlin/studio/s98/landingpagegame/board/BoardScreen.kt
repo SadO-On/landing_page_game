@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toIntRect
+import androidx.lifecycle.viewmodel.compose.viewModel
 import landingpagegame.composeapp.generated.resources.Res
 import landingpagegame.composeapp.generated.resources.pause_btn
 import org.jetbrains.compose.resources.painterResource
@@ -49,11 +50,13 @@ import kotlin.collections.plus
 
 @Composable
 fun BoardScreen(
+    viewModel: BoardViewModel = viewModel { BoardViewModel() },
     isFirst: Boolean,
     toResult: (starsCount: Int, missingWords: List<String>) -> Unit,
+    onBackToHome: () -> Unit
 ) {
 
-    val viewModel = remember { BoardViewModel() }
+
     val uiState by viewModel.state.collectAsState()
 
     DisposableEffect(key1 = Unit) {
@@ -76,7 +79,6 @@ fun BoardScreen(
 //    BackHandler(enabled = false) {}
 
 
-
     LaunchedEffect(uiState.isNavigate) {
         if (uiState.isNavigate) {
             toResult(uiState.stars, uiState.remainingAnswers)
@@ -89,17 +91,18 @@ fun BoardScreen(
 //                showTutorial.value = false
 //                viewModel.onEvent(BoardEvents.GameStarted)
 //            }
-//        if (isPause)
-//            PauseScreen(onBackToHome = {
-//                viewModel.onEvent(BoardEvents.OnCanel)
-//                isPause = false
-//                navHostController.popBackStack()
-//            }) {
-//                viewModel.onEvent(BoardEvents.OnResume)
-//                isPause = false
-//            }
+        if (isPause)
+            PauseScreen(onBackToHome = {
+                viewModel.onEvent(BoardEvents.OnCancel)
+                isPause = false
+                onBackToHome()
+            }) {
+                viewModel.onEvent(BoardEvents.OnResume)
+                isPause = false
+            }
 
-        BoardScreenContent(list = uiState.grid,
+        BoardScreenContent(
+            list = uiState.grid,
             points = uiState.points,
             percent = uiState.percent,
             time = uiState.time,

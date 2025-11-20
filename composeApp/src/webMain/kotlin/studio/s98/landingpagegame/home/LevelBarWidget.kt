@@ -48,7 +48,7 @@ fun LevelBarWidget(percent: Float) {
             progress = { percent / 100f },
             modifier = Modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(10.dp)),
+                .clip(RoundedCornerShape(8.dp)),
             color = Color.Transparent,
             trackColor = Color(0xffB862D1),
             strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
