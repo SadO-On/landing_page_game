@@ -9,14 +9,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun LevelBarWidget(percent: Float) {
@@ -48,16 +47,10 @@ fun LevelBarWidget(percent: Float) {
             progress = { percent / 100f },
             modifier = Modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(8.dp)),
+                .clip(RoundedCornerShape(10.dp)),
             color = Color.Transparent,
             trackColor = Color(0xffB862D1),
-            strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
-        )
+            strokeCap = StrokeCap.Butt,
+            )
     }
-}
-
-@Preview
-@Composable
-private fun LevelBarWidgetPreview() {
-    LevelBarWidget(percent = 15f)
 }

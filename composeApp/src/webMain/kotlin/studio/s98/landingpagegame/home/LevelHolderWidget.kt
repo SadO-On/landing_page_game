@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import landingpagegame.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import landingpagegame.composeapp.generated.resources.level_holder
 
 @Composable
@@ -26,17 +25,10 @@ fun LevelHolderWidget(level: String) {
         )
         Text(
             text = level,
-            modifier = Modifier.padding(top = 12.dp),
+            modifier = Modifier.padding(top = 24.dp),
             fontWeight = FontWeight.Bold,
             color = Color.White,
             fontSize = 40.sp
         )
     }
-}
-
-
-@Preview
-@Composable
-fun LevelHolderWidgetPreview() {
-    LevelHolderWidget("12")
 }

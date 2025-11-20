@@ -40,7 +40,7 @@ fun MainNavGraph(
             }
         }
         composable<Board> {
-            BoardScreen(isFirst = false, toResult = { star, list ->
+            BoardScreen(isFirst = true, toResult = { star, list ->
                 navController.navigate(Result(star, list))
 
             }, onBackToHome = {

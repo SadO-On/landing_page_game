@@ -86,11 +86,11 @@ fun BoardScreen(
     }
 
     Box {
-//        if (showTutorial.value)
-//            TutorialScreen {
-//                showTutorial.value = false
-//                viewModel.onEvent(BoardEvents.GameStarted)
-//            }
+        if (showTutorial.value)
+            TutorialScreen {
+                showTutorial.value = false
+                viewModel.onEvent(BoardEvents.GameStarted)
+            }
         if (isPause)
             PauseScreen(onBackToHome = {
                 viewModel.onEvent(BoardEvents.OnCancel)
