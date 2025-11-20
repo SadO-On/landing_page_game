@@ -65,7 +65,7 @@ private fun PauseScreenContent(
                         })
             }
             ScaleAnimation(delayTime = 500) {
-                PrimaryButtonWidget(text = "العودة للرئيسية") {
+                PrimaryButtonWidget(text = "خروج") {
                     onBackToHome()
                 }
             }

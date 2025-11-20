@@ -1,6 +1,12 @@
 package studio.s98.landingpagegame
 
-enum class Routes(val title: String) {
-    Title(title = "title_screen"),
-    Board(title = "board_screen")
-}
+import kotlinx.serialization.Serializable
+
+@Serializable
+object Title
+
+@Serializable
+object Board
+
+@Serializable
+data class Result(val starsCount: Int, val missingWords: List<String>)

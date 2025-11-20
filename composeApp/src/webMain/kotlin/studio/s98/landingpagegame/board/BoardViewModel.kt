@@ -220,7 +220,7 @@ class BoardViewModel() : ViewModel() {
         wrongSwiped(list)
         viewModelScope.launch {
             log("clearSwiped(list) -> delay(1000)")
-            delay(1000)
+            delay(500)
             log("clearSwiped(list) -> calling resetSwiped(list)")
             resetSwiped(list)
         }
@@ -231,7 +231,7 @@ class BoardViewModel() : ViewModel() {
         wrongSwiped()
         viewModelScope.launch {
             log("clearSwiped() -> delay(1000)")
-            delay(1000)
+            delay(500)
             log("clearSwiped() -> calling resetSwiped()")
             resetSwiped()
         }

@@ -22,7 +22,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun PrimaryButtonWidget(text: String, onClick: () -> Unit) {
 //    val context = LocalContext.current
-//    val player = MediaPlayer.create(context, R.raw.click)
+//    val player = MediaPlayer.create(context, R.files.click)
 
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.clickable {

@@ -4,12 +4,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import androidx.navigation.toRoute
+import androidx.savedstate.read
+import kotlinx.serialization.json.Json
 import studio.s98.landingpagegame.board.BoardScreen
 import studio.s98.landingpagegame.home.HomeScreen
+import studio.s98.landingpagegame.result.ResultScreen
 
 @Composable
 fun App() {
@@ -24,21 +30,33 @@ fun App() {
 fun MainNavGraph(
     navController: NavHostController = rememberNavController()
 ) {
-    val backStackEntry by navController.currentBackStackEntryAsState()
-
     NavHost(
         navController = navController,
-        startDestination = Routes.Title.name
+        startDestination = Title
     ) {
-        composable(route = Routes.Title.name) {
+        composable<Title> {
             HomeScreen {
-                navController.navigate(Routes.Board.name)
+                navController.navigate(Board)
             }
         }
-        composable(route = Routes.Board.name) {
-            BoardScreen(isFirst = false, toResult = { _, _ -> }, onBackToHome = {
+        composable<Board> {
+            BoardScreen(isFirst = false, toResult = { star, list ->
+                navController.navigate(Result(star, list))
+
+            }, onBackToHome = {
                 navController.navigateUp()
             })
+        }
+
+        composable<Result> { entry ->
+            val result: Result = entry.toRoute()
+            ResultScreen(
+                isWin = result.starsCount != 0,
+                starCount = result.starsCount,
+                missingWords = result.missingWords
+            ) {
+                navController.navigateUp()
+            }
         }
     }
 }
