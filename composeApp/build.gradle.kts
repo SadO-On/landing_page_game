@@ -33,6 +33,7 @@ kotlin {
             implementation(libs.kstore)
             implementation(libs.kstore.storage)
             implementation(libs.compose.navigation)
+            implementation(libs.logging)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

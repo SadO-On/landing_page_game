@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -222,7 +223,7 @@ private fun BoardScreenContent(
         }
         Spacer(modifier = Modifier.weight(1f))
 
-//        AnimatedFrames(modifier = Modifier.size(172.dp), feels)
+        AnimatedFrames(modifier = Modifier.size(172.dp), feels)
         Text(
             text = "شعور التسعيني",
             fontWeight = FontWeight.ExtraBold,
