@@ -47,7 +47,8 @@ fun ResultScreen(
     isWin: Boolean,
     starCount: Int,
     missingWords: List<String>,
-    onBackClicked: () -> Unit
+    onBackClicked: () -> Unit,
+    onNextClicked: () -> Unit
 ) {
 
     val isShow = remember { mutableStateOf(false) }
@@ -73,9 +74,10 @@ fun ResultScreen(
             onBackClicked()
         },
         missingWords = missingWords,
-        onDoneLottie = { isShow.value = true }) {
-
-    }
+        onNextClicked = {
+            onNextClicked()
+        },
+        onDoneLottie = { isShow.value = true })
 }
 
 private fun getStarsRes(starCount: Int): String {

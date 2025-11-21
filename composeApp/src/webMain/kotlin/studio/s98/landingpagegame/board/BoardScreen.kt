@@ -93,7 +93,7 @@ fun BoardScreen(
         }
     }
 
-    Box {
+    Box (modifier = Modifier.fillMaxSize().background(mainBackground)){
         when {
             // 1) First time: show tutorial, don't block it with loading
             showTutorial.value -> {
@@ -161,7 +161,6 @@ private fun BoardScreenContent(
 
     Column(
         modifier = Modifier
-            .background(mainBackground)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -292,8 +291,7 @@ fun letterIdAtOffset(hitPoint: Offset, state: LazyGridState): Int? =
 private fun BoardLoadingScreen() {
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .background(mainBackground),
+            .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()

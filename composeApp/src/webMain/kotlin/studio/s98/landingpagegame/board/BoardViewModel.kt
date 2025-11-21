@@ -29,7 +29,8 @@ class BoardViewModel() : ViewModel() {
     private var currentTime = 0L
     private val repository = MainRepositoryImp()
     private var selectedPath = ArrayList<Pair<Int, Int>>()
-    private var totalTime: Long = 120000
+//    private var totalTime: Long = 120000
+    private var totalTime: Long = 12000
     private var bB: BoardBuilder = BoardBuilder(rows = 5, columns = 4)
 
     fun onEvent(event: BoardEvents) {

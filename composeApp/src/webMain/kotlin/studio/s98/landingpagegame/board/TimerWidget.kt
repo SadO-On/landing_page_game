@@ -3,6 +3,7 @@ package studio.s98.landingpagegame.board
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,11 +56,11 @@ fun TimerWidget(percent: Float, time: String) {
             LinearProgressIndicator(
                 progress = { percent / 100f },
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxHeight()
                     .clip(RoundedCornerShape(10.dp)),
-                color = Color.Transparent,
-                trackColor = Color(0xffB862D1),
-                strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
+                color = Color(0xffB862D1),
+                trackColor = Color.Transparent,
+                strokeCap = StrokeCap.Butt,
             )
             Text(
                 text = time,

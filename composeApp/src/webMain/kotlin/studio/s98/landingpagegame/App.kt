@@ -53,13 +53,17 @@ fun MainNavGraph(
             ResultScreen(
                 isWin = result.starsCount != 0,
                 starCount = result.starsCount,
-                missingWords = result.missingWords
-            ) {
-                navController.popBackStack(
-                    route = Title,
-                    inclusive = false
-                )
-            }
+                missingWords = result.missingWords,
+                onNextClicked = {
+                    navController.popBackStack()
+                },
+                onBackClicked = {
+                    navController.popBackStack(
+                        route = Title,
+                        inclusive = false
+                    )
+                }
+            )
         }
     }
 }
