@@ -49,7 +49,7 @@ fun TutorialScreen(onDone: () -> Unit) {
 
                 }
             PrimaryButtonWidget(text = if (step.intValue == 3) "فهمت" else "التالي") {
-                if (step.intValue > 3) {
+                if (step.intValue >= 3) {
                     onDone()
                 } else {
                     step.intValue += 1

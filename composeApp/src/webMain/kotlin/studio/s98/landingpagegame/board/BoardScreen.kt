@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -59,6 +60,13 @@ fun BoardScreen(
 
     val uiState by viewModel.state.collectAsState()
 
+    val isBoardReady by remember {
+        derivedStateOf {
+            uiState.grid.isNotEmpty() &&
+                    uiState.grid.flatten().all { it.letter.isNotBlank() }
+        }
+    }
+
     DisposableEffect(key1 = Unit) {
         onDispose {
 //            viewModel.release()
@@ -86,35 +94,50 @@ fun BoardScreen(
     }
 
     Box {
-        if (showTutorial.value)
-            TutorialScreen {
-                showTutorial.value = false
-                viewModel.onEvent(BoardEvents.GameStarted)
-            }
-        if (isPause)
-            PauseScreen(onBackToHome = {
-                viewModel.onEvent(BoardEvents.OnCancel)
-                isPause = false
-                onBackToHome()
-            }) {
-                viewModel.onEvent(BoardEvents.OnResume)
-                isPause = false
+        when {
+            // 1) First time: show tutorial, don't block it with loading
+            showTutorial.value -> {
+                TutorialScreen {
+                    showTutorial.value = false
+                    viewModel.onEvent(BoardEvents.GameStarted)
+                }
             }
 
-        BoardScreenContent(
-            list = uiState.grid,
-            points = uiState.points,
-            percent = uiState.percent,
-            time = uiState.time,
-            feels = uiState.falehFeel,
-            onPause = {
-                viewModel.onEvent(BoardEvents.OnPause)
-                isPause = true
-            },
-            onUserSwiped = { ids ->
-                viewModel.onEvent(BoardEvents.LetterSwipedWithLetterInformation(ids))
-            })
+            // 2) Board is not ready yet: show ONLY loading, don't compose the heavy UI
+            !isBoardReady -> {
+                BoardLoadingScreen()
+            }
+
+            // 3) Board ready: show normal UI (and pause overlay when needed)
+            else -> {
+                if (isPause)
+                    PauseScreen(onBackToHome = {
+                        viewModel.onEvent(BoardEvents.OnCancel)
+                        isPause = false
+                        onBackToHome()
+                    }) {
+                        viewModel.onEvent(BoardEvents.OnResume)
+                        isPause = false
+                    }
+
+                BoardScreenContent(
+                    list = uiState.grid,
+                    points = uiState.points,
+                    percent = uiState.percent,
+                    time = uiState.time,
+                    feels = uiState.falehFeel,
+                    onPause = {
+                        viewModel.onEvent(BoardEvents.OnPause)
+                        isPause = true
+                    },
+                    onUserSwiped = { ids ->
+                        viewModel.onEvent(BoardEvents.LetterSwipedWithLetterInformation(ids))
+                    }
+                )
+            }
+        }
     }
+
     LaunchedEffect(key1 = Unit) {
 //        viewModel.soundStateListener()
     }
@@ -265,3 +288,14 @@ fun letterIdAtOffset(hitPoint: Offset, state: LazyGridState): Int? =
     }?.key as? Int
 
 
+@Composable
+private fun BoardLoadingScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(mainBackground),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator()
+    }
+}

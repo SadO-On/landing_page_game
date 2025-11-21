@@ -55,7 +55,10 @@ fun MainNavGraph(
                 starCount = result.starsCount,
                 missingWords = result.missingWords
             ) {
-                navController.navigateUp()
+                navController.popBackStack(
+                    route = Title,
+                    inclusive = false
+                )
             }
         }
     }
