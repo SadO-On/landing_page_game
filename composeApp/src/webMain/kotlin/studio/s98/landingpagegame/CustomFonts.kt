@@ -3,15 +3,12 @@ package studio.s98.landingpagegame
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import landingpagegame.composeapp.generated.resources.Res
 import landingpagegame.composeapp.generated.resources.Tajawal_Bold
 import landingpagegame.composeapp.generated.resources.Tajawal_Regular
 import org.jetbrains.compose.resources.Font
-import org.jetbrains.compose.resources.FontResource
 
 @Composable
 fun TajwalTypography(): Typography {

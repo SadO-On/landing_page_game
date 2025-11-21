@@ -1,4 +1,4 @@
-package viewmodel.models
+package studio.s98.landingpagegame.models
 
 
 

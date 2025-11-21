@@ -2,17 +2,11 @@ package studio.s98.landingpagegame
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import androidx.navigation.toRoute
-import androidx.savedstate.read
-import kotlinx.serialization.json.Json
 import studio.s98.landingpagegame.board.BoardScreen
 import studio.s98.landingpagegame.home.HomeScreen
 import studio.s98.landingpagegame.result.ResultScreen
