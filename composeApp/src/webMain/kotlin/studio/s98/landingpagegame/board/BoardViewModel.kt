@@ -2,10 +2,13 @@ package studio.s98.landingpagegame.board
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import studio.s98.landingpagegame.AudioPlayer
 import studio.s98.landingpagegame.data.MainRepositoryImp
 import studio.s98.landingpagegame.util.Timer
 import studio.s98.landingpagegame.util.formatMillisecondsToMinutes
@@ -29,9 +32,16 @@ class BoardViewModel() : ViewModel() {
     private var currentTime = 0L
     private val repository = MainRepositoryImp()
     private var selectedPath = ArrayList<Pair<Int, Int>>()
-//    private var totalTime: Long = 120000
-    private var totalTime: Long = 12000
+
+    //    private var totalTime: Long = 120000
+    private var totalTime: Long = 120000
     private var bB: BoardBuilder = BoardBuilder(rows = 5, columns = 4)
+
+    private val startSound = AudioPlayer("sounds/new_board.wav")
+    private val correctSound = AudioPlayer("sounds/correct_swipe.wav")
+    private val wrongSound = AudioPlayer("sounds/wrong_swipe.wav")
+    private val almostSound = AudioPlayer("sounds/almost.wav")
+
 
     fun onEvent(event: BoardEvents) {
         when (event) {
@@ -235,6 +245,7 @@ class BoardViewModel() : ViewModel() {
     }
 
     private fun wrongSwiped() {
+        newSound(type = SoundType.WRONG_SWIPE)
         val currentGrid = _state.value.grid
 
         val newGrid = currentGrid.mapIndexed { rowIndex, row ->
@@ -253,7 +264,6 @@ class BoardViewModel() : ViewModel() {
         }
 
         updateState(grid = newGrid)
-        newSound(type = SoundType.WRONG_SWIPE)
     }
 
     private fun removeWord(selectedWord: String) {
@@ -472,5 +482,40 @@ class BoardViewModel() : ViewModel() {
             id = generateRandomUUIDString(),
             soundState = type
         )
+    }
+
+    fun soundStateListener() {
+        viewModelScope.launch {
+            _soundState.collect {
+                withContext(Dispatchers.Default) {
+                    when (_soundState.value.soundState) {
+                        SoundType.STARTED -> {
+                            startSound.play()
+                        }
+
+                        SoundType.CORRECT_SWIPE -> {
+                            correctSound.play()
+                        }
+
+                        SoundType.WRONG_SWIPE -> {
+                            wrongSound.play()
+                        }
+
+                        SoundType.HALF_TIME -> {
+                            almostSound.play()
+                        }
+
+                        SoundType.IDLE -> {}
+                    }
+                }
+            }
+        }
+    }
+
+    fun release(){
+        startSound.release()
+        correctSound.release()
+        wrongSound.release()
+        almostSound.release()
     }
 }

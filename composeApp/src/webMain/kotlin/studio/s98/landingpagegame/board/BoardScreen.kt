@@ -69,7 +69,7 @@ fun BoardScreen(
 
     DisposableEffect(key1 = Unit) {
         onDispose {
-//            viewModel.release()
+            viewModel.release()
         }
     }
     var isPause by remember {
@@ -84,16 +84,13 @@ fun BoardScreen(
     })
 
 
-//    BackHandler(enabled = false) {}
-
-
     LaunchedEffect(uiState.isNavigate) {
         if (uiState.isNavigate) {
             toResult(uiState.stars, uiState.remainingAnswers)
         }
     }
 
-    Box (modifier = Modifier.fillMaxSize().background(mainBackground)){
+    Box(modifier = Modifier.fillMaxSize().background(mainBackground)) {
         when {
             // 1) First time: show tutorial, don't block it with loading
             showTutorial.value -> {
@@ -139,7 +136,7 @@ fun BoardScreen(
     }
 
     LaunchedEffect(key1 = Unit) {
-//        viewModel.soundStateListener()
+        viewModel.soundStateListener()
     }
 
 

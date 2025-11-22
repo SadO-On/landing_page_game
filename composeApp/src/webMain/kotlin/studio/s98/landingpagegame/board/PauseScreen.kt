@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
@@ -18,6 +20,7 @@ import androidx.compose.ui.window.DialogProperties
 import landingpagegame.composeapp.generated.resources.Res
 import landingpagegame.composeapp.generated.resources.resume
 import org.jetbrains.compose.resources.painterResource
+import studio.s98.landingpagegame.AudioPlayer
 import studio.s98.landingpagegame.PrimaryButtonWidget
 import studio.s98.landingpagegame.util.ScaleAnimation
 
@@ -42,6 +45,14 @@ private fun PauseScreenContent(
     onBackToHome: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    val soundPlayer = remember { AudioPlayer("sounds/click.wav") }
+
+    DisposableEffect(soundPlayer) {
+        onDispose {
+            soundPlayer.release()
+        }
+    }
+
     Dialog(
         onDismissRequest = {},
         DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
@@ -66,6 +77,7 @@ private fun PauseScreenContent(
             }
             ScaleAnimation(delayTime = 500) {
                 PrimaryButtonWidget(text = "خروج") {
+                    soundPlayer.play()
                     onBackToHome()
                 }
             }

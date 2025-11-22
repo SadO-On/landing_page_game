@@ -2,11 +2,9 @@ package studio.s98.landingpagegame.result
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -24,7 +22,6 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import kotlinx.coroutines.delay
 import landingpagegame.composeapp.generated.resources.Res
 import landingpagegame.composeapp.generated.resources.phrase_1
@@ -36,7 +33,6 @@ import studio.s98.landingpagegame.BackButtonWidget
 import studio.s98.landingpagegame.LottieAnimation
 import studio.s98.landingpagegame.PrimaryButtonWidget
 import studio.s98.landingpagegame.board.BoardTileWidget
-import studio.s98.landingpagegame.board.BoardViewModel
 import studio.s98.landingpagegame.models.Letter
 import studio.s98.landingpagegame.util.ScaleAnimation
 import studio.s98.landingpagegame.util.mainBackground
@@ -56,13 +52,13 @@ fun ResultScreen(
 
     DisposableEffect(key1 = Unit) {
         onDispose {
-//            viewModel.releasePlayers()
+            viewModel.releasePlayers()
         }
     }
 
     LaunchedEffect(key1 = Unit) {
-//        delay(500)
-//        viewModel.playSound(starCount)
+        delay(500)
+        viewModel.playSound(starCount)
     }
 
     ResultContent(
