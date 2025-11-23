@@ -218,6 +218,8 @@ class BoardViewModel() : ViewModel() {
     }
 
     private fun wrongSwiped(list: List<Letter>) {
+        newSound(type = SoundType.WRONG_SWIPE)
+
         val idsToMark = list.map { it.id }.toSet()
         val currentGrid = _state.value.grid
 
@@ -245,7 +247,7 @@ class BoardViewModel() : ViewModel() {
     }
 
     private fun wrongSwiped() {
-        newSound(type = SoundType.WRONG_SWIPE)
+        log("wrongSwiped function Called")
         val currentGrid = _state.value.grid
 
         val newGrid = currentGrid.mapIndexed { rowIndex, row ->
@@ -498,7 +500,8 @@ class BoardViewModel() : ViewModel() {
                         }
 
                         SoundType.WRONG_SWIPE -> {
-                            wrongSound.play()
+                            log("wrongSound")
+                            wrongSound.play() // No play
                         }
 
                         SoundType.HALF_TIME -> {
