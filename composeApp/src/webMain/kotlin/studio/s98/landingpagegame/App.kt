@@ -35,7 +35,11 @@ fun MainNavGraph(
         }
         composable<Board> {
             BoardScreen(isFirst = true, toResult = { star, list ->
-                navController.navigate(Result(star, list))
+                navController.navigate(Result(star, list)){
+                    popUpTo(Title){
+                        inclusive = false
+                    }
+                }
 
             }, onBackToHome = {
                 navController.navigateUp()
@@ -49,7 +53,11 @@ fun MainNavGraph(
                 starCount = result.starsCount,
                 missingWords = result.missingWords,
                 onNextClicked = {
-                    navController.popBackStack()
+                    navController.navigate(Board){
+                        popUpTo(Title){
+                            inclusive = false
+                        }
+                    }
                 },
                 onBackClicked = {
                     navController.popBackStack(
@@ -64,7 +72,7 @@ fun MainNavGraph(
 
 /****
  * TODO remaining bugs:
- * 1- Back to game
+ * 1- Back to game ✅
  * 2- Wierd . in the timer ✅
  * 3- Wrong swipe sound not trigger ✅
  * 4- Performance enhancements
