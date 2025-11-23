@@ -34,7 +34,7 @@ class BoardViewModel() : ViewModel() {
     private var selectedPath = ArrayList<Pair<Int, Int>>()
 
     //    private var totalTime: Long = 120000
-    private var totalTime: Long = 120000
+    private var totalTime: Long = 12000
     private var bB: BoardBuilder = BoardBuilder(rows = 5, columns = 4)
 
     private val startSound = AudioPlayer("sounds/new_board.wav")
@@ -247,7 +247,6 @@ class BoardViewModel() : ViewModel() {
     }
 
     private fun wrongSwiped() {
-        log("wrongSwiped function Called")
         val currentGrid = _state.value.grid
 
         val newGrid = currentGrid.mapIndexed { rowIndex, row ->
@@ -451,8 +450,6 @@ class BoardViewModel() : ViewModel() {
         falehFeel: FalehFeel? = null,
     ) {
         val newGrid = grid ?: _state.value.grid
-        val wrongCount = newGrid.flatten().count { it.isWrong }
-
         _state.value = BoardState(
             grid = newGrid,
             percent = percent ?: _state.value.percent,
@@ -500,7 +497,6 @@ class BoardViewModel() : ViewModel() {
                         }
 
                         SoundType.WRONG_SWIPE -> {
-                            log("wrongSound")
                             wrongSound.play() // No play
                         }
 
