@@ -457,7 +457,7 @@ class BoardViewModel() : ViewModel() {
         falehFeel: FalehFeel? = null,
     ) {
         val newGrid = grid ?: _state.value.grid
-        _state.value = BoardState(
+        _state.value = _state.value.copy(
             grid = newGrid,
             percent = percent ?: _state.value.percent,
             time = time ?: _state.value.time,
@@ -466,7 +466,6 @@ class BoardViewModel() : ViewModel() {
             stars = stars ?: _state.value.stars,
             remainingAnswers = remainingAnswers ?: _state.value.remainingAnswers,
             falehFeel = falehFeel ?: _state.value.falehFeel,
-            id = generateRandomUUIDString()
         )
     }
 
