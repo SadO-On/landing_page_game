@@ -139,7 +139,6 @@ fun BoardScreen(
         viewModel.soundStateListener()
     }
 
-
 }
 
 @Composable
@@ -174,7 +173,7 @@ private fun BoardScreenContent(
 
         }
         Text(
-            text = "كل حرف يمثل 50 نقطة",
+            text = "كل كلمة تجدها تمثل 100 نقطة",
             fontWeight = FontWeight.ExtraBold,
             color = Color(0xff9F4FC0),
             fontSize = 20.sp

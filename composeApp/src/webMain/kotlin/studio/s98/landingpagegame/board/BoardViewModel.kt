@@ -33,8 +33,8 @@ class BoardViewModel() : ViewModel() {
     private val repository = MainRepositoryImp()
     private var selectedPath = ArrayList<Pair<Int, Int>>()
 
-    //    private var totalTime: Long = 120000
-    private var totalTime: Long = 12000
+//        private var totalTime: Long = 120000
+    private var totalTime: Long = 60000
     private var bB: BoardBuilder = BoardBuilder(rows = 5, columns = 4)
 
     private val startSound = AudioPlayer("sounds/new_board.wav")
@@ -398,6 +398,13 @@ class BoardViewModel() : ViewModel() {
     private fun countPoints() {
         val newPoints = _state.value.points - 100
         updateState(points = newPoints, falehFeel = FalehFeel.CORRECT)
+
+        viewModelScope.launch {
+            delay(2500)
+            if (_state.value.falehFeel == FalehFeel.CORRECT) {
+                updateState(falehFeel = FalehFeel.IDLE)
+            }
+        }
     }
 
     private fun disableTile() {

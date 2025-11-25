@@ -71,10 +71,7 @@ fun MainNavGraph(
 }
 
 /****
- * TODO remaining bugs:
- * 1- Back to game ✅
- * 2- Wierd . in the timer ✅
- * 3- Wrong swipe sound not trigger ✅
- * 4- Performance enhancements
- * 5- Wrong Freeze In the 00:52
+ * TODO remaining:
+ * 1- Performance enhancements
+ * 2- Wrong Freeze In the 00:52
  */
