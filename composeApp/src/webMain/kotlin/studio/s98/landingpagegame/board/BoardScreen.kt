@@ -238,7 +238,7 @@ private fun BoardScreenContent(
                         isOdd = index % 2 == 0,
                         letter = flatList[index],
                         isSelected = selectId.value,
-                        textSize = 30
+                        textSize = 24
                     )
                 }
             }

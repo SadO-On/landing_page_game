@@ -5,3 +5,19 @@ html, body {
     padding: 0;
     overflow: hidden;
 }
+
+  body {
+    overflow: hidden; /* no page scroll at all */
+  }
+
+  /* For Compose WASM / canvas-based UI */
+  canvas {
+    touch-action: none;          /* ✨ key line for Safari & touch */
+    -webkit-user-select: none;
+  }
+
+  /* If you’re JS DOM-based and have a root div, e.g. #root or #ComposeTarget */
+  #root, #ComposeTarget {
+    touch-action: none;
+    -webkit-user-select: none;
+  }

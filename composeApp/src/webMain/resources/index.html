@@ -8,6 +8,14 @@
     <link type="text/css" rel="stylesheet" href="styles.css">
     <!-- Your Compose WASM app -->
     <script type="application/javascript" src="composeApp.js"></script>
+    <script>
+        document.addEventListener('touchmove', function (e) {
+          // limit this to your game root if you have one:
+          // if (!e.target.closest('#root')) return;
+          e.preventDefault();
+        }, { passive: false });
+    </script>
+
 </head>
 <body>
 </body>

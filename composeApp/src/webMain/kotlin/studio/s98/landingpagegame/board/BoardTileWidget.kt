@@ -42,7 +42,7 @@ fun BoardTileWidget(
                 color = animatedColor.value,
                 shape = RoundedCornerShape(6.dp)
             )
-            .size((screenWidthDp.value * 0.15).dp)
+            .size((screenWidthDp.value * 0.12).dp)
             .animateContentSize(),
         contentAlignment = Alignment.Center
     ) {
