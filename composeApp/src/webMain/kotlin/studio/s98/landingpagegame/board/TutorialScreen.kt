@@ -1,5 +1,6 @@
 package studio.s98.landingpagegame.board
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -27,34 +28,46 @@ fun TutorialScreen(onDone: () -> Unit) {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (step.value == 1)
-                LottieAnimation(
-                    modifier = Modifier.size(650.dp),
-                    path = "files/tutorial_first.json"
-                ) {
+            Box(
+                modifier = Modifier.weight(0.6f),
+                contentAlignment = Alignment.Center
+            ) {
+                if (step.value == 1)
+                    LottieAnimation(
+                        modifier = Modifier.size(650.dp),
+                        path = "files/tutorial_first.json"
+                    ) {
 
-                }
-            if (step.value == 2)
-                LottieAnimation(
-                    modifier = Modifier.size(650.dp),
-                    path = "files/tutorial_second.json"
-                ) {
+                    }
+                if (step.value == 2)
+                    LottieAnimation(
+                        modifier = Modifier.size(650.dp),
+                        path = "files/tutorial_second.json"
+                    ) {
 
-                }
-            if (step.value == 3)
-                LottieAnimation(
-                    modifier = Modifier.size(650.dp),
-                    path = "files/tutorial_third.json"
-                ) {
+                    }
+                if (step.value == 3)
+                    LottieAnimation(
+                        modifier = Modifier.size(650.dp),
+                        path = "files/tutorial_third.json"
+                    ) {
+                    }
+            }
 
-                }
-            PrimaryButtonWidget(text = if (step.intValue == 3) "فهمت" else "التالي") {
-                if (step.intValue >= 3) {
-                    onDone()
-                } else {
-                    step.intValue += 1
+
+            Box(
+                modifier = Modifier.weight(0.2f),
+                contentAlignment = Alignment.Center
+            ) {
+                PrimaryButtonWidget(text = if (step.intValue == 3) "فهمت" else "التالي") {
+                    if (step.intValue >= 3) {
+                        onDone()
+                    } else {
+                        step.intValue += 1
+                    }
                 }
             }
+
         }
     }
 }

@@ -2,6 +2,7 @@ package studio.s98.landingpagegame.result
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import studio.s98.landingpagegame.AudioPlayer
 
@@ -11,7 +12,6 @@ class ResultViewModel : ViewModel() {
     private val one = AudioPlayer("sounds/one_star_sound.wav")
     private val two = AudioPlayer("sounds/two_star_sound.wav")
     private val three = AudioPlayer("sounds/three_star_sound.wav")
-
 
     fun playSound(startCount: Int) {
         viewModelScope.launch {
