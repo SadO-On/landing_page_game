@@ -154,6 +154,7 @@ private fun BoardScreenContent(
     val gridState = rememberLazyGridState()
 
     val selectedIds = rememberSaveable { mutableStateOf(emptySet<Int>()) }
+    val flatList = remember(list) { list.flatten() }
 
     Column(
         modifier = Modifier
@@ -229,13 +230,13 @@ private fun BoardScreenContent(
                     20.dp
                 )
             ) {
-                items(list.flatten().size, key = { it }) { index ->
+                items(flatList.size, key = { it }) { index ->
                     val selectId =
                         remember { derivedStateOf { index in selectedIds.value } }
                     BoardTileWidget(
                         modifier = Modifier,
                         isOdd = index % 2 == 0,
-                        letter = list.flatten()[index],
+                        letter = flatList[index],
                         isSelected = selectId.value,
                         textSize = 30
                     )
