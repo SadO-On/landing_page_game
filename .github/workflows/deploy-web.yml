@@ -1,0 +1,58 @@
+name: Deploy Compose Web to GitHub Pages
+
+on:
+  push:
+    branches: [ master ]   # or master / whatever your default branch is
+  workflow_dispatch:      # allow manual runs
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # 🔧 Build your Compose Web distribution
+      # If your module name is not "composeApp", adjust the path/task
+      - name: Build JS distribution
+        run: ./gradlew :composeApp:jsBrowserDistribution
+
+      # 📦 Upload the built site for GitHub Pages
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Path to the folder that contains index.html
+          # For Compose Multiplatform Web this is usually:
+          # composeApp/build/dist/js/productionExecutable
+          path: composeApp/build/dist/js/productionExecutable
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
