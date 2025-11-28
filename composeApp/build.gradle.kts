@@ -41,7 +41,6 @@ kotlin {
             implementation(libs.compottie.network)
             implementation(libs.compottie.resources)
             implementation(libs.kotlin.serialization)
-            implementation("org.jetbrains.compose.ui:ui-web:1.7.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

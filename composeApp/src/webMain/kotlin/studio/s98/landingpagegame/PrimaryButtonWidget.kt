@@ -38,7 +38,7 @@ fun PrimaryButtonWidget(text: String, onClick: () -> Unit) {
         Image(
             painter = painterResource(resource =  Res.drawable.play_button),
             contentDescription = "play button",
-            modifier = Modifier.fillMaxWidth().height(120.dp)
+            modifier = Modifier.height(120.dp)
         )
         Text(
             text = text,
