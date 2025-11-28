@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,7 +43,7 @@ fun HomeScreen(
                 contentDescription = "Title"
             )
         }
-        ImageStarterPlayer(modifier = Modifier.scale(1.5f))
+        ImageStarterPlayer(modifier = Modifier.size(350.dp))
 
 
 

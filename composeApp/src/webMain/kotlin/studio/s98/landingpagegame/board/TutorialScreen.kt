@@ -29,7 +29,7 @@ fun TutorialScreen(onDone: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
-                modifier = Modifier.weight(0.6f),
+                modifier = Modifier.weight(0.8f),
                 contentAlignment = Alignment.Center
             ) {
                 if (step.value == 1)
