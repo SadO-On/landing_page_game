@@ -3,6 +3,7 @@ package studio.s98.landingpagegame.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,7 +22,8 @@ fun LevelHolderWidget(level: String) {
     Box(contentAlignment = Alignment.Center) {
         Image(
             painter = painterResource(resource = Res.drawable.level_holder),
-            contentDescription = "Level holder"
+            contentDescription = "Level holder",
+            modifier = Modifier.size(120.dp)
         )
         Text(
             text = level,

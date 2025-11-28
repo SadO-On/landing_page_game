@@ -3,6 +3,8 @@ package studio.s98.landingpagegame
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +37,8 @@ fun PrimaryButtonWidget(text: String, onClick: () -> Unit) {
     }) {
         Image(
             painter = painterResource(resource =  Res.drawable.play_button),
-            contentDescription = "play button"
+            contentDescription = "play button",
+            modifier = Modifier.fillMaxWidth().height(120.dp)
         )
         Text(
             text = text,
