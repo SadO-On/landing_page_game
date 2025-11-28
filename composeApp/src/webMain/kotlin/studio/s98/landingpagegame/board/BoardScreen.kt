@@ -161,11 +161,11 @@ private fun BoardScreenContent(
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier = Modifier.padding(16.dp)) {
+        Row(modifier = Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
             TimerWidget(percent = percent, time = time)
             PointsWidget(points)
             Image(
-                modifier = Modifier.clickable {
+                modifier = Modifier.size(62.dp).clickable {
                     onPause()
                 },
                 painter = painterResource(resource = Res.drawable.pause_btn),
