@@ -25,36 +25,37 @@ import studio.s98.landingpagegame.viewmodel.UserLevel
 
 @Composable
 fun HomeScreen(
-    onPlayClick: ()-> Unit
-){
+    onPlayClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(mainBackground),
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        ScaleAnimation(delayTime = 300) {
+    ) {
+        ScaleAnimation(delayTime = 400) {
             LevelWidget(Modifier.padding(horizontal = 24.dp), UserLevel())
         }
-        ScaleAnimation(delayTime = 400) {
+        ScaleAnimation(delayTime = 600) {
             Image(
                 painter = painterResource(resource = Res.drawable.title),
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 32.dp).fillMaxWidth().height(110.dp),
+                modifier = Modifier.padding(horizontal = 24.dp, vertical = 32.dp).fillMaxWidth()
+                    .height(110.dp),
                 contentDescription = "Title"
             )
         }
-        ImageStarterPlayer(modifier = Modifier.size(350.dp))
+        ImageStarterPlayer(modifier = Modifier.size(370.dp))
 
 
 
-            Spacer(modifier = Modifier.weight(1f))
-        ScaleAnimation(delayTime = 100) {
+        Spacer(modifier = Modifier.weight(1f))
+        ScaleAnimation(delayTime = 200) {
 
             PrimaryButtonWidget(text = "العب") {
                 onPlayClick()
             }
         }
-        ScaleAnimation(delayTime = 600) {
+        ScaleAnimation(delayTime = 800) {
             Image(
                 painter = painterResource(resource = Res.drawable.powered_by),
                 contentDescription = "98's Studio",

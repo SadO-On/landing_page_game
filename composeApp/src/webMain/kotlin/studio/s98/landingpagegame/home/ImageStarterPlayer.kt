@@ -1,17 +1,13 @@
 package studio.s98.landingpagegame.home
 
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.VectorConverter
-import androidx.compose.animation.core.animateValue
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import kotlinx.coroutines.delay
 import landingpagegame.composeapp.generated.resources.Res
 import landingpagegame.composeapp.generated.resources.start1
 import landingpagegame.composeapp.generated.resources.start2
@@ -74,6 +70,22 @@ import landingpagegame.composeapp.generated.resources.start58
 import landingpagegame.composeapp.generated.resources.start59
 import landingpagegame.composeapp.generated.resources.start60
 import org.jetbrains.compose.resources.painterResource
+import androidx.compose.ui.graphics.painter.Painter
+import landingpagegame.composeapp.generated.resources.start61
+import landingpagegame.composeapp.generated.resources.start62
+import landingpagegame.composeapp.generated.resources.start63
+import landingpagegame.composeapp.generated.resources.start64
+import landingpagegame.composeapp.generated.resources.start65
+import landingpagegame.composeapp.generated.resources.start66
+import landingpagegame.composeapp.generated.resources.start67
+import landingpagegame.composeapp.generated.resources.start68
+import landingpagegame.composeapp.generated.resources.start69
+import landingpagegame.composeapp.generated.resources.start70
+import landingpagegame.composeapp.generated.resources.start71
+import landingpagegame.composeapp.generated.resources.start72
+import landingpagegame.composeapp.generated.resources.start73
+import landingpagegame.composeapp.generated.resources.start74
+import landingpagegame.composeapp.generated.resources.start75
 
 @Composable
 fun ImageStarterPlayer(
@@ -141,26 +153,82 @@ fun ImageStarterPlayer(
             Res.drawable.start58,
             Res.drawable.start59,
             Res.drawable.start60,
+            Res.drawable.start61,
+            Res.drawable.start62,
+            Res.drawable.start63,
+            Res.drawable.start64,
+            Res.drawable.start65,
+            Res.drawable.start66,
+            Res.drawable.start67,
+            Res.drawable.start68,
+            Res.drawable.start69,
+            Res.drawable.start70,
+            Res.drawable.start71,
+            Res.drawable.start72,
+            Res.drawable.start73,
+            Res.drawable.start74,
+            Res.drawable.start75,
         )
     }
-    val painters = frames.map {
-        painterResource(it)
+
+    // 🔹 This actually triggers loading for all frames
+    val painters: List<Painter> = frames.map { painterResource(it) }
+
+    // 🔹 We won't start the animation until every painter is actually loaded
+    var isReady by remember { mutableStateOf(false) }
+
+    LaunchedEffect(painters) {
+        if (painters.isEmpty()) return@LaunchedEffect
+
+        // On web, painterResource returns an "empty" painter first.
+        // We wait until all painters have a non-zero intrinsic size.
+        while (true) {
+            val allLoaded = painters.all { painter ->
+                val size = painter.intrinsicSize
+                size.width > 0f && size.height > 0f
+            }
+            if (allLoaded) {
+                isReady = true
+                break
+            }
+            // Check ~every frame
+            delay(16)
+        }
     }
-    val value by rememberInfiniteTransition(label = "").animateValue(
-        initialValue = 0,
-        targetValue = painters.lastIndex, // Animate to the list's last index
-        typeConverter = Int.VectorConverter,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 3000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ), label = "frameIndex"
-    )
+
+    val anim = remember { Animatable(0f) }
+
+    // 🔹 Start the infinite manual loop ONLY after all frames are loaded
+    LaunchedEffect(isReady) {
+        if (!isReady || painters.isEmpty()) return@LaunchedEffect
+
+        val lastIndexFloat = painters.lastIndex.toFloat()
+
+        while (true) {
+            anim.animateTo(
+                targetValue = lastIndexFloat,
+                animationSpec = tween(
+                    durationMillis = 3000,
+                    easing = LinearEasing
+                )
+            )
+            anim.snapTo(0f)
+        }
+    }
 
     if (painters.isNotEmpty()) {
-        Image(
-            painter = painters[value],
-            contentDescription = null,
-            modifier = modifier
-        )
+        val index = anim.value.toInt().coerceIn(0, painters.lastIndex)
+
+
+        if (isReady) {
+            Image(
+                painter = painters[index],
+                contentDescription = null,
+                modifier = modifier
+            )
+        } else {
+            Box {}
+        }
+
     }
 }
